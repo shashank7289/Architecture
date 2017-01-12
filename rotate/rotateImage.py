@@ -24,9 +24,6 @@ def rotateImg(faceImg):
     #rotate image
     rotatedImg = rotate(faceImg, angle)
         
-#     cv2.putText(img, str(round(angle,2)), (10, 30),cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 3)
-#     cv2.imshow('input',img)
-#     cv2.imwrite(resultName,rotatedImg*255)
-#     cv2.imshow('output',rotatedImg)
-#     cv2.waitKey(0)
+    cv2.imshow('output',rotatedImg)
+    cv2.waitKey(0)
     return rotatedImg

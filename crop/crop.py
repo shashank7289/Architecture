@@ -42,10 +42,7 @@ def faceCropping(img):
     eyecornerDst = [(int(eyeFactor*w ), int(h/3)), (int((1-eyeFactor)*w), int(h/3))];
 
     # Corners of the eye in input image
-#     faceObj.leftEyeCorner = [ 241,  204]
-#     faceObj.rightEyeCorner = [ 369,  203]
     eyecornerSrc  = [faceObj.leftEyeCorner, faceObj.rightEyeCorner]
-    
     
     # Compute similarity transform
     tform = similarityTransform(eyecornerSrc, eyecornerDst)

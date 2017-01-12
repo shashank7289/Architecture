@@ -24,17 +24,19 @@ class face:
         self.rightArr[(self.counter%self.x)] = val
         self.counter = self.counter + 1
     
-def distance(fObj):
+def distance(img,fObj):
     #distance between upper and lower points of left eye
     leftEyeUpper = faceObj.leftEye[1]
     leftEyeLower = faceObj.leftEye[5]
     yDiffLeftEye = leftEyeLower[1] - leftEyeUpper[1]
-    
+
     #distance between upper and lower points of right eye
     rightEyeUpper = faceObj.rightEye[1]
     rightEyeLower = faceObj.rightEye[5]
     yDiffRightEye = rightEyeLower[1] - rightEyeUpper[1]
     
+    fObj.fxn(yDiffLeftEye)
+    fObj.fxn(yDiffRightEye)
     speedFactor = 1.45 #detection performance decreases with increasing speed factor
     avgFactor = 1.5 #detection performance increases with reducing speed factor
     
@@ -45,6 +47,7 @@ def distance(fObj):
         
         #condition to include gradual changes in user position
         if yDiffLeftEye < (leftAvg/avgFactor) or yDiffRightEye < (rightAvg/avgFactor):
+            cv2.putText(img, 'Blink Detected', (10, 30),cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
             Beep(1000, 250) # frequency, duration
 
 def blinkDetection(faceCascade,predictor):
@@ -56,13 +59,10 @@ def blinkDetection(faceCascade,predictor):
         ret,img = cap.read()
         
         #detect face
-        faces = findFace(img,faceCascade)
-
-        #determine face landmark points
-        findLandmarks(img,faces,predictor)
+        faceImg = findFace(img,faceCascade,predictor)
         
         #distance between upper and lower points of eyes
-        distance(fObj)
+        distance(faceImg,fObj)
                     
-        cv2.imshow('output',img)
+        cv2.imshow('Blinking Detection',img)
         cv2.waitKey(1)

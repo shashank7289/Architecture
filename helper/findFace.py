@@ -3,27 +3,29 @@ Created on Jan 5, 2017
 
 @author: uid38420
 '''
-from numpy import size
-from cv2 import imshow,waitKey,putText,FONT_HERSHEY_SIMPLEX
+from numpy import size,array
+from helper.findLandmarks import findLandmarks
+from helper.faceOnly import faceOnly
+from cv2 import cvtColor,COLOR_BGR2GRAY
 
-class faceNotDetected(Exception):
-    pass
-
-def findFace(img,faceCascade):
+def findFace(img,faceCascade,predictor):
     faces = faceCascade.detectMultiScale(img, 1.3, 5)
-    noOfFaces = size(faces, 0)
-    if (noOfFaces == 1):
-        return faces
-    
+    noOfFaces = size(faces,0)
+     
     #discard smaller faces
-    elif noOfFaces > 1:
+    if noOfFaces == 1 or noOfFaces > 1:
         for (x,y,w,h) in faces:
             if h < 100:
                 pass
             elif h > 100:
-                return faces
+                #face only
+                faceImg = faceOnly(img,faces)
+                gray = cvtColor(faceImg, COLOR_BGR2GRAY)
+
+                #determine face landmark points
+                faceLmarks = faceCascade.detectMultiScale(gray, 1.3, 5)
+                findLandmarks(gray,faceLmarks,predictor)
+                
+                return faceImg
     else:
-        putText(img, "No face detected", (10, 40), FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-        imshow("Output Image", img)
-        waitKey(1)
-#         raise faceNotDetected
+        return array([])

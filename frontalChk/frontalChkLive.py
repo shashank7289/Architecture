@@ -15,10 +15,7 @@ def frontalChkLive(faceCascade,predictor):
         ret,img = cap.read()
         
         #detect face
-        faces = findFace(img,faceCascade)
-          
-        #determine face landmark points
-        findLandmarks(img,faces,predictor)
+        faces = findFace(img,faceCascade,predictor)
                   
         decision = frontalCondition()
         putText(img, decision, (10, 30),FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 3)
