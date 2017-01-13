@@ -49,7 +49,7 @@ def blurRemove(img):
     elif blur < 100 and blur >= 20:
         #Sharpening
         kernelSharpen = array([[-1, -1, -1], [-1, 9, -1], [-1, -1, -1]])
-        output = filter2D(img, -1, kernelSharpen)
+        adjusted = filter2D(img, -1, kernelSharpen)
     elif blur < 20 and blur >= 0:
         #Edge Enhancement
         kernelSharpen = array([[-1,-1,-1,-1,-1],
@@ -57,7 +57,7 @@ def blurRemove(img):
                                [-1, 2, 8, 2,-1],
                                [-1, 2, 2, 2,-1],
                                [-1,-1,-1,-1,-1]])/8.0
-        output = filter2D(img, -1, kernelSharpen)
-    imshow("res", output)
-    waitKey(0)
-    return output
+        adjusted = filter2D(img, -1, kernelSharpen)
+#     imshow("res", adjusted)
+#     waitKey(0)
+    return adjusted

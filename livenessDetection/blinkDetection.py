@@ -3,12 +3,11 @@ Created on Dec 5, 2016
 
 @author: uid38420
 '''
-import cv2
+from cv2 import VideoCapture,putText,FONT_HERSHEY_SIMPLEX,imshow,waitKey
 from winsound import Beep
 from heapq import nlargest
 from helper.findFace import findFace
 from helper.findLandmarks import faceObj
-from helper.findLandmarks import findLandmarks
 
 import numpy as np
 
@@ -24,7 +23,7 @@ class face:
         self.rightArr[(self.counter%self.x)] = val
         self.counter = self.counter + 1
     
-def distance(img,fObj):
+def distance(faceImg,fObj):
     #distance between upper and lower points of left eye
     leftEyeUpper = faceObj.leftEye[1]
     leftEyeLower = faceObj.leftEye[5]
@@ -47,13 +46,13 @@ def distance(img,fObj):
         
         #condition to include gradual changes in user position
         if yDiffLeftEye < (leftAvg/avgFactor) or yDiffRightEye < (rightAvg/avgFactor):
-            cv2.putText(img, 'Blink Detected', (10, 30),cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+            putText(faceImg, 'Blink Detected', (10, 30),FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
             Beep(1000, 250) # frequency, duration
 
 def blinkDetection(faceCascade,predictor):
 
     fObj = face()
-    cap = cv2.VideoCapture(0)
+    cap = VideoCapture(0)
     
     while True:
         ret,img = cap.read()
@@ -64,5 +63,5 @@ def blinkDetection(faceCascade,predictor):
         #distance between upper and lower points of eyes
         distance(faceImg,fObj)
                     
-        cv2.imshow('Blinking Detection',img)
-        cv2.waitKey(1)
+        imshow('Blinking Detection',img)
+        waitKey(1)

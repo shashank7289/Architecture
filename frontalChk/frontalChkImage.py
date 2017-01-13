@@ -10,5 +10,6 @@ def frontalChkImg(img):
     
     decision = frontalCondition()
     putText(img, decision, (10, 30),FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 3)
-    imshow('output',img)
-    waitKey(0)
+#     imshow('output',img)
+#     waitKey(0)
+    return decision

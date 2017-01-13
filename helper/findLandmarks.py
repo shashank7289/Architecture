@@ -15,11 +15,10 @@ class face(object):
 faceObj = face();
         
 #find Landmarks
-def findLandmarks(img,faces,predictor):
+def findLandmarks(img,face,predictor):
     
     lMarks = zeros((68, 2))
-    
-    for (x,y,w,h) in faces:
+    for (x,y,w,h) in face:
         d = rectangle(x,y,x+w,y+h)
         i = 0
         for p in predictor(img, d).parts():

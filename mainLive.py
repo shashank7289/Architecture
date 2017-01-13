@@ -12,20 +12,20 @@ from frontalChk.frontalChkLive import frontalChkLive
 from livenessDetection.blinkDetection import blinkDetection
 
 if __name__ == '__main__' :
-    
+#-------------------------------------------------------------------------------
     #initializations
     #paths
     dirPath = dirname(realpath(__file__))
     faceCascade = CascadeClassifier(dirPath + '/resources/haarcascade_frontalface_default.xml')
     predictor = shape_predictor(dirPath + '/resources/shape_predictor_68_face_landmarks.dat')
-    
+#-------------------------------------------------------------------------------
     #affine transforms
     
     #roll angle check
 #     rollChk(faceCascade,predictor)
     
     #live rotation
-    rotateLive(faceCascade,predictor)
+#     rotateLive(faceCascade,predictor)
 
     #frontal or not
 #     frontalChkLive(faceCascade,predictor)

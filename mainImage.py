@@ -4,7 +4,7 @@ Created on Jan 5, 2017
 @author: uid38420
 '''
 from os.path import dirname,realpath
-from cv2 import CascadeClassifier,imread,cvtColor,COLOR_BGR2YUV,COLOR_YUV2BGR
+from cv2 import CascadeClassifier,imread
 from dlib import shape_predictor
 from helper.findFace import findFace
 from preprocessing.preprocessing import histogramEqualization,clahe,gammaCorrection,gicClahe,blurRemove
@@ -13,7 +13,7 @@ from frontalChk.frontalChkImage import frontalChkImg
 from crop.crop import faceCropping
 
 if __name__ == '__main__' :
-    
+#-------------------------------------------------------------------------------
     #initializations
     
     #preprocessing
@@ -28,7 +28,7 @@ if __name__ == '__main__' :
     
     #detect face + landmarks + return face image only
     faceImg = findFace(img,faceCascade,predictor)
-
+#-------------------------------------------------------------------------------
     #preprocessing
     
     #histogram equalization
@@ -45,7 +45,7 @@ if __name__ == '__main__' :
     
     #remove blur
 #     blurRemove(faceImg)
-    
+#-------------------------------------------------------------------------------
     #affine transforms
     
     #rotate image
@@ -55,4 +55,4 @@ if __name__ == '__main__' :
 #     frontalChkImg(faceImg)
     
     #crop
-    faceCropping(faceImg)
+#     faceCropping(faceImg)
