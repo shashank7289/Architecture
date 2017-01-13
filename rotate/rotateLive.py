@@ -4,7 +4,7 @@ Created on Nov 18, 2016
 @author: uid38420
 '''
 from cv2 import VideoCapture,putText,FONT_HERSHEY_SIMPLEX,imshow,waitKey
-from numpy import str
+from numpy import str,size
 from helper.findFace import findFace
 from helper.findLandmarks import faceObj
 from helper.findRollAngle import findRollAngle
@@ -18,8 +18,8 @@ def rotateLive(faceCascade,predictor):
         
         #detect face
         faceImg = findFace(img,faceCascade,predictor)
-        
-        if faceImg.size !=0:
+        print size(faceImg)
+        if size(faceImg,0) !=0:
 
             #Determine roll angle
             angle = findRollAngle(faceObj.leftEyeCorner, faceObj.rightEyeCorner)

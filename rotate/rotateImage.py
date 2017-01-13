@@ -16,6 +16,6 @@ def rotateImg(faceImg):
     #rotate image
     rotatedImg = rotate(faceImg, angle)
         
-#     imshow('output',rotatedImg)
-#     waitKey(0)
+    imshow('output',rotatedImg)
+    waitKey(0)
     return rotatedImg

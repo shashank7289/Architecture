@@ -51,6 +51,6 @@ def faceCropping(img):
     imgWarped = warpAffine(img, tform, (w,h));
     imgMorphed = imgWarped * 255
     
-#     imshow("Cropped image",imgWarped)
-#     waitKey(0)
+    imshow("Cropped image",imgWarped)
+    waitKey(0)
     return imgMorphed
