@@ -18,12 +18,9 @@ class ThreeD_Model:
         self.indbad = model['indbad'][0, 0]#0x1
         self.ref_U = np.asarray(model['refU'][0,0])
 
-
-
 def frontalize(img, proj_matrix, ref_U, eyemask):
     ACC_CONST = 800
     img = img.astype('float32')
-    print "query image shape:", img.shape
 
     bgind = np.sum(np.abs(ref_U), 2) == 0
     # count the number of times each pixel in the query is accessed
@@ -64,7 +61,7 @@ def frontalize(img, proj_matrix, ref_U, eyemask):
     sum_right = sumaccs[midcolumn+1:].sum()
     sum_diff = sum_left - sum_right
 
-    if np.abs(sum_diff) > ACC_CONST: # one side is ocluded
+    if np.abs(sum_diff) > ACC_CONST: # one side is occluded
         ones = np.ones((ref_U.shape[0], midcolumn))
         zeros = np.zeros((ref_U.shape[0], midcolumn))
         if sum_diff > ACC_CONST: # left side of face has more occlusions
