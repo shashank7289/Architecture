@@ -13,7 +13,7 @@ def findFace(img,faceCascade,predictor):
     noOfFaces = size(faces,0)
      
     #discard smaller faces
-    if noOfFaces == 1 or noOfFaces > 1:
+    if noOfFaces >= 1:
         for (x,y,w,h) in faces:
             if h < 100:
                 pass
@@ -25,7 +25,7 @@ def findFace(img,faceCascade,predictor):
                 #determine face landmark points
                 faceLmarks = faceCascade.detectMultiScale(gray, 1.3, 5)
                 findLandmarks(gray,faceLmarks,predictor)
-                
                 return faceImg
     else:
         return array([])
+#         return img
